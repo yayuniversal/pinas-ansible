@@ -30,13 +30,13 @@ print_yellow "Remounting disks read-only..."
 echo 1 > /proc/sys/kernel/sysrq
 echo u > /proc/sysrq-trigger
 
-print_yellow "\nOverwritting bootfs..."
+print_yellow "\nOverwritting bootfs... ($BOOTFS_BACKUP -> $BOOTFS_TARGET)"
 dd if=$BOOTFS_BACKUP of=$BOOTFS_TARGET bs=$BS status=progress
 
-print_yellow "\nOverwritting rootfs..."
+print_yellow "\nOverwritting rootfs... ($ROOTFS_BACKUP -> $ROOTFS_TARGET)"
 dd if=$ROOTFS_BACKUP of=$ROOTFS_TARGET bs=$BS status=progress
 
-print_yellow "\nRestoring original disk id..."
+print_yellow "\nRestoring original disk id ($DISK_ID) on $ROOT_DEV... "
 sfdisk --disk-id $ROOT_DEV $DISK_ID
 
 # print_yellow "\nChecking and resizing filesystem..."
