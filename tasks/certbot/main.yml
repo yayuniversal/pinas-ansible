@@ -37,7 +37,6 @@
       certbot certonly
         --non-interactive
         --agree-tos
-        --email {{ certbot_email }}
         --preferred-challenges dns
         --authenticator dns-infomaniak
         --dns-infomaniak-credentials /etc/letsencrypt/infomaniak.ini
