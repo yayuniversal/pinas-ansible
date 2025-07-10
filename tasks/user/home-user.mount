@@ -1,0 +1,16 @@
+[Unit]
+Description=Bind mount {{ username }} home to the ZFS pool
+Before=local-fs.target
+After=zfs-mount.service
+Requires=zfs-mount.service
+AssertPathIsDirectory=/nas/users/{{ username }}
+AssertPathIsMountPoint=/nas/users
+
+[Mount]
+What=/nas/users/{{ username }}
+Where=/home/{{ username }}
+Type=none
+Options=bind
+
+[Install]
+WantedBy=local-fs.target

@@ -14,18 +14,19 @@
       - /home/{{ username }}/.ssh/authorized_keys
       - /nas/users/{{ username }}/.ssh/authorized_keys
 
-- name: Bind mount {{ username }} home (/nas/users/{{ username }} -> /home/{{ username }})
-  tags: user-home
-  mount:
-    src: /nas/users/{{ username }}
-    path: /home/{{ username }}
-    opts: bind
-    fstype: none
-    state: mounted
-  # remote_user: fuck
-  # user:
-  #   name: "{{ username }}"
-  #   home: "/nas/users/{{ username }}"
+- name: Copy home-{{ username }}.mount to /etc/systemd/system
+  template:
+    src: home-user.mount
+    dest: /etc/systemd/system/home-{{ username }}.mount
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Enable home-{{ username }}.mount unit file
+  systemd_service:
+    name: home-{{ username }}.mount
+    state: started
+    enabled: yes
 
 - name: Copy some dotfiles
   tags: dotfiles
