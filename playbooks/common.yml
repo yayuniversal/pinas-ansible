@@ -33,6 +33,7 @@
           - git
           - htop
           - jq
+          - lm-sensors
           - lsd
           - lshw
           - lsof
