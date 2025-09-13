@@ -13,8 +13,8 @@ services:
       HOST_WHITELIST: 127.0.0.1
     volumes:
       - /nas/appdata/transmission:/config
-      - /nas/data/Transmission/downloads:/downloads
-      - /nas/data/Transmission/watch:/watch
+      - /nas/data/Torrents/downloads:/downloads
+      - /nas/data/Torrents/watch:/watch
     ports:
       - 127.0.0.1:{{ services.transmission.port }}:9091
       - 51413:51413/tcp
