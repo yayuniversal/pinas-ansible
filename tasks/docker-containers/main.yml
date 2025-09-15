@@ -2,6 +2,7 @@
 - name: List containers
   set_fact:
     container_list: "{{ 'tasks/docker-containers/containers/*/docker-compose.yml' | fileglob | map('dirname') | map('basename') }}"
+    containers_with_env_file: "{{ 'tasks/docker-containers/containers/*/.env' | fileglob | map('dirname') | map('basename') }}"
 
 - name: Create directories for compose files
   file:
@@ -27,6 +28,7 @@
     group: docker
     mode: 0640
   loop: "{{ container_list }}"
+  when: item in containers_with_env_file
 
 - name: Start containers
   command: docker compose --ansi never --progress plain up -d
