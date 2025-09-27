@@ -8,7 +8,7 @@
     install_media_tools: yes
 
 - name: PiNAS setup
-  hosts: pinas
+  hosts: pinas*
   become: true
 
   vars_files:
