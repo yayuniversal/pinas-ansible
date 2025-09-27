@@ -28,6 +28,7 @@
           - command-not-found
           - cryptsetup
           - curl
+          - exiftool
           - fd-find
           - fish
           - git
