@@ -28,6 +28,7 @@
     # - { role: nextcloud, tags: nextcloud }
 
   pre_tasks:
+    - { import_tasks: tasks/test.yml, tags: test }
     - { import_tasks: tasks/storage/main.yml, tags: storage }
     - { import_tasks: tasks/symlinks/main.yml, tags: symlinks }
     - { import_tasks: tasks/raspi-reset/main.yml, tags: raspi-reset }
