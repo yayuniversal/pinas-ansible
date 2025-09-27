@@ -1,0 +1,10 @@
+{% set subdomain = services.uptime_kuma.subdomain %}
+{% set port = services.uptime_kuma.port %}
+
+{% extends ".proxy-template.j2" %}
+
+{% block proxy_params %}
+proxy_http_version 1.1;
+proxy_set_header   Upgrade $http_upgrade;
+proxy_set_header   Connection "upgrade";
+{% endblock %}
