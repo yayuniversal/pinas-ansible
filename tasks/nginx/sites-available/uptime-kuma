@@ -1,5 +1,4 @@
-{% set subdomain = services.uptime_kuma.subdomain %}
-{% set port = services.uptime_kuma.port %}
+{% set service = services.uptime_kuma %}
 
 {% extends ".proxy-template.j2" %}
 

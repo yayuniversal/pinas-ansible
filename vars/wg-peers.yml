@@ -1,0 +1,11 @@
+---
+wg_peers:
+  peer1:
+    public_key:
+    psk:
+    allowed_ips:
+
+  peer2:
+    public_key:
+    psk:
+    allowed_ips:

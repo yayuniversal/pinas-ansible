@@ -13,10 +13,12 @@
 
   vars_files:
     - vars/main.yml
+    - vars/users.yml
     - vars/storage.yml
     - vars/secrets.yml
     - vars/services.yml
     - vars/firewall.yml
+    - vars/wg-peers.yml
     - vars/samba.yml
 
   roles:

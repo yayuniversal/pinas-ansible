@@ -1,5 +1,4 @@
-{% set subdomain = services.ntfy.subdomain %}
-{% set port = services.ntfy.port %}
+{% set service = services.ntfy %}
 
 {% extends ".proxy-template.j2" %}
 

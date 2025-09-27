@@ -1,4 +1,3 @@
-{% set subdomain = services.navidrome.subdomain %}
-{% set port = services.navidrome.port %}
+{% set service = services.navidrome %}
 
 {% extends ".proxy-template.j2" %}

@@ -1,4 +1,3 @@
-{% set subdomain = services.transmission.subdomain %}
-{% set port = services.transmission.port %}
+{% set service = services.transmission %}
 
 {% extends ".proxy-template.j2" %}

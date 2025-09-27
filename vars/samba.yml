@@ -1,14 +1,4 @@
 ---
-users:
-  user1:
-    password:
-    group:
-    uid:
-
-unix_groups:
-  group1:
-    gid:
-
 shares:
   - name:
     comment:

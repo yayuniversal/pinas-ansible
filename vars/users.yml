@@ -1,0 +1,10 @@
+---
+unix_groups:
+  group1:
+    gid:
+
+users:
+  user1:
+    password:
+    group:
+    uid:

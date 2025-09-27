@@ -2,19 +2,30 @@ server {
     listen 443 ssl http2;
     listen [::]:443 ssl http2;
 
-    server_name {{ subdomain }}.{{ main_domain }};
+    server_name {{ service.subdomain }}.{{ main_domain }};
+
+    # Allowlist
+    include /etc/nginx/conf.d/allowlist.conf;
+{% for user in service.allow_users | default([]) %}
+{% for device in users[user].devices | default([]) %}
+{% for ip in wg_peers[device].allowed_ips | split_and_strip(',') %}
+    allow {{ip}};  # {{ user }}/{{ device }}
+{% endfor %}
+{% endfor %}
+{% endfor %}
+    deny all;
 
     add_header Strict-Transport-Security "max-age=63072000" always;
 
-    access_log /var/log/nginx/{{ subdomain }}.access.log;
-    error_log /var/log/nginx/{{ subdomain }}.error.log;
+    access_log /var/log/nginx/{{ service.subdomain }}.access.log;
+    error_log /var/log/nginx/{{ service.subdomain }}.error.log;
 
     {% filter indent(width=4) -%}
     {% block server_params %}{% endblock %}
     {% endfilter %}
 
     location / {
-        proxy_pass http://127.0.0.1:{{ port }};
+        proxy_pass http://127.0.0.1:{{ service.port }};
 
         {% filter indent(width=8) -%}
         {% block proxy_params %}{% endblock %}

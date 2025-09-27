@@ -1,5 +1,4 @@
-{% set subdomain = services.vaultwarden.subdomain %}
-{% set port = services.vaultwarden.port %}
+{% set service = services.vaultwarden %}
 
 map $http_upgrade $connection_upgrade {
     default upgrade;
