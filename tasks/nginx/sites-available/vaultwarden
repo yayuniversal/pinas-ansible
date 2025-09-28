@@ -3,7 +3,7 @@ map $http_upgrade $connection_upgrade {
     ''      "";
 }
 
-{% extends ".proxy-template.j2" %}
+{% extends "proxy-template.j2" %}
 
 {% block server_params %}
 client_max_body_size 525M;
