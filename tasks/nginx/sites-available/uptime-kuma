@@ -1,5 +1,3 @@
-{% set service = services.uptime_kuma %}
-
 {% extends ".proxy-template.j2" %}
 
 {% block proxy_params %}

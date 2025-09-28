@@ -33,12 +33,15 @@
 
 - name: Copy Nginx vhosts config files to /etc/nginx/sites-available
   template:
-    src: "{{ item }}"
-    dest: "/etc/nginx/sites-available/{{ item | basename }}"
+    src: "sites-available/{{ vhost }}"
+    dest: "/etc/nginx/sites-available/{{ vhost }}"
     owner: root
     group: root
     mode: 0644
-  with_fileglob: sites-available/*
+  loop: "{{ lookup('fileglob', 'sites-available/*', wantlist=True) | map('basename') | list }}"
+  loop_control:
+    loop_var: vhost
+    label: "{{ vhost }}"
   register: nginx_vhosts_files
 
 - name: Make symlinks for vhosts
@@ -48,6 +51,8 @@
     state: link
     force: yes
   with_fileglob: sites-available/*
+  loop_control:
+    label: "{{ item | basename }}"
   register: nginx_vhosts_symlinks
 
 - name: Reload nginx

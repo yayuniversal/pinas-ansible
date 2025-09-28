@@ -1,0 +1,38 @@
+{% extends ".proxy-template.j2" %}
+
+{% block server_params %}
+	# brotli on;
+	# brotli_comp_level 6;
+	# brotli_types
+	# 	text/css
+	# 	text/plain
+	# 	text/xml
+	# 	text/x-component
+	# 	text/javascript
+	# 	application/x-javascript
+	# 	application/javascript
+	# 	application/json
+	# 	application/manifest+json
+	# 	application/vnd.api+json
+	# 	application/xml
+	# 	application/xhtml+xml
+	# 	application/rss+xml
+	# 	application/atom+xml
+	# 	application/vnd.ms-fontobject
+	# 	application/x-font-ttf
+	# 	application/x-font-opentype
+	# 	application/x-font-truetype
+	# 	image/svg+xml
+	# 	image/x-icon
+	# 	image/vnd.microsoft.icon
+	# 	font/ttf
+	# 	font/eot
+	# 	font/otf
+	# 	font/opentype;
+{% endblock %}
+
+{% block proxy_params %}
+    proxy_set_header X-Forwarded-Server $host;
+    proxy_set_header Host $http_host;
+    proxy_redirect off;
+{% endblock %}
