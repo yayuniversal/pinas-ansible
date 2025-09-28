@@ -1,4 +1,4 @@
-{% extends ".proxy-template.j2" %}
+{% extends "proxy-template.j2" %}
 
 {% block server_params %}
 	# brotli on;

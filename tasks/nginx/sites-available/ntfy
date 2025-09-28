@@ -1,4 +1,4 @@
-{% extends ".proxy-template.j2" %}
+{% extends "proxy-template.j2" %}
 
 {% block proxy_params %}
 proxy_http_version 1.1;

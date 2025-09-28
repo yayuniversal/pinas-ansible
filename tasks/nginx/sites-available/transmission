@@ -1,1 +1,1 @@
-{% extends ".proxy-template.j2" %}
+{% extends "proxy-template.j2" %}
