@@ -12,16 +12,18 @@
       community.general.pipx:
         name: certbot
         state: present
+        global: true
 
     - name: Inject certbot-dns-infomaniak in certbot venv
       community.general.pipx:
         name: certbot
         state: inject
+        global: true
         inject_packages: certbot-dns-infomaniak
 
   environment:
-    PIPX_HOME: /opt/pipx
-    PIPX_BIN_DIR: /usr/local/sbin
+    PIPX_GLOBAL_HOME: /opt/pipx
+    PIPX_GLOBAL_BIN_DIR: /usr/local/sbin
 
 - name: Save infomaniak token to /etc/letsencrypt/infomaniak.ini
   template:
