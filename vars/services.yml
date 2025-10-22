@@ -20,6 +20,6 @@ services:
     subdomain: ntfy
     port: 6666
 
-  uptime_kuma:
+  uptime-kuma:
     subdomain: uptime
     port: 3001
