@@ -23,3 +23,7 @@ services:
   uptime-kuma:
     subdomain: uptime
     port: 3001
+
+  immich:
+    subdomain: photos
+    port: 2283
