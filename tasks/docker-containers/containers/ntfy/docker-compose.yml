@@ -3,7 +3,6 @@ services:
     image: binwiederhier/ntfy
     container_name: ntfy
     command: serve
-    # user: UID:GID
     environment:
       NTFY_BASE_URL: https://{{ services.ntfy.subdomain }}.{{ main_domain }}
       NTFY_BEHIND_PROXY: true
@@ -24,3 +23,4 @@ services:
         retries: 3
         start_period: 40s
     restart: unless-stopped
+    init: true # needed, if healthcheck is used. Prevents zombie processes
