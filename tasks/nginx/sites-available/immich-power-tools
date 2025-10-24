@@ -1,0 +1,1 @@
+{% extends "proxy-template.j2" %}
