@@ -6,7 +6,7 @@
   authorized_key:
     user: "{{ username }}"
     path: "{{ item.0 }}"
-    key: "{{ lookup('file', '{{ item.1 }}') }}"
+    key: "{{ lookup('file', item.1) }}"
     state: present
   loop: "{{ authorized_keys_files | unique | product(ssh_keys) }}"
   vars:

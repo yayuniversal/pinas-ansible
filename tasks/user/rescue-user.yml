@@ -10,6 +10,6 @@
   tags: ssh-keys
   authorized_key:
     user: fuck
-    key: "{{ lookup('file', '{{ item }}') }}"
+    key: "{{ lookup('file', item) }}"
     state: present
   loop: "{{ ssh_keys }}"

@@ -4,7 +4,6 @@
     src: /usr/share/systemd/tmp.mount
     dest: /etc/systemd/system/tmp.mount
     state: link
-    force: yes
 
 - name: Enable tmp.mount unit file
   systemd_service:
