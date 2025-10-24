@@ -1,0 +1,29 @@
+---
+- name: Copy update script to /usr/local/sbin/dyndns-update
+  copy:
+    content: |
+      #!/bin/bash
+      curl -4 -X POST https://{{ dyndns_login }}:{{ dyndns_pass }}@infomaniak.com/nic/update?hostname={{ dyndns_domain }} > /var/log/dyndns4.log
+      curl -6 -X POST https://{{ dyndns_login }}:{{ dyndns_pass }}@infomaniak.com/nic/update?hostname={{ dyndns_domain }} > /var/log/dyndns6.log
+    dest: /usr/local/sbin/dyndns-update
+    owner: root
+    group: root
+    mode: 0700
+
+- name: Add cron job to call dyndns-update every 5min
+  cron:
+    name: dyndns-update
+    user: root
+    day: "*"
+    hour: "*"
+    minute: "*/5"
+    job: /usr/local/sbin/dyndns-update
+    state: present
+    cron_file: dyndns-update
+  register: dyndns_cronjob
+
+- name: Reload cron service
+  systemd_service:
+    name: cron
+    state: reload
+  when: dyndns_cronjob.changed
