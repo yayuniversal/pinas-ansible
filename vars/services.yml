@@ -27,3 +27,7 @@ services:
   immich:
     subdomain: photos
     port: 2283
+
+  immich-power-tools:
+    subdomain: immich-power-tools
+    port: 8001
