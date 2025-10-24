@@ -21,7 +21,7 @@
 - name: Import public SSH keys to /etc/security/sudo_authorized_keys
   lineinfile:
     path: /etc/security/sudo_authorized_keys
-    line: "{{ lookup('file', '{{ item }}') }}"
+    line: "{{ lookup('file', item) }}"
     owner: root
     group: root
     mode: 0400
