@@ -1,2 +1,3 @@
 ---
-- { import_tasks: ddclient/main.yml, tags: ddclient }
+# - { import_tasks: ddclient/main.yml, tags: ddclient }
+- { import_tasks: dyndns/main.yml, tags: dyndns }
