@@ -31,3 +31,7 @@ services:
   immich-power-tools:
     subdomain: immich-power-tools
     port: 8001
+
+  pgadmin:
+    subdomain: pgadmin
+    port: 5050

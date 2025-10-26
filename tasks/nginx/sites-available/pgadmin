@@ -1,0 +1,8 @@
+{% extends "proxy-template.j2" %}
+
+{% block proxy_params %}
+proxy_redirect off;
+
+# Huh, this is in pgAdmin official documentation but it actually doesn't work when it's set??
+# proxy_set_header X-Scheme $scheme;
+{% endblock %}
