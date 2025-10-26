@@ -1,9 +1,4 @@
 ---
-# Dotfiles
-dotfiles:
-  - "~/.tmux.conf"
-  - "~/.vimrc"
-
 # Argon EON
 argoneon_enable_rtc_service: no
 argoneon_enable_fan_lcd_service: yes

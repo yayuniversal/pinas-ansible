@@ -34,7 +34,7 @@
     - { import_tasks: tasks/storage/main.yml, tags: storage }
     - { import_tasks: tasks/symlinks/main.yml, tags: symlinks }
     - { import_tasks: tasks/raspi-reset/main.yml, tags: raspi-reset }
-    - { import_tasks: tasks/user/main.yml, tags: user }
+    - { import_tasks: tasks/users/main.yml, tags: users }
 
   tasks:
     - { import_tasks: tasks/security/main.yml, tags: security }
@@ -51,3 +51,6 @@
         name: "{{ username }}"
         groups: "{{ user_groups + unix_groups | list }}"
         append: yes
+
+- import_playbook: playbooks/user.yml
+  tags: user
