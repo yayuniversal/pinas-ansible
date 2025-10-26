@@ -27,12 +27,3 @@
     name: home-{{ username }}.mount
     state: started
     enabled: yes
-
-- name: Copy some dotfiles
-  tags: dotfiles
-  become: yes
-  become_user: "{{ username }}"
-  copy:
-    src: "{{ item }}"
-    dest: "{{ item }}"
-  loop: "{{ dotfiles }}"

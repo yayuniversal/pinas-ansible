@@ -1,0 +1,24 @@
+---
+- name: User config
+  hosts: all
+  tags: user
+
+  tasks:
+    - name: Clone dotfiles repo
+      tags: dotfiles
+      git:
+        repo: git@github.com:yayuniversal/dotfiles.git
+        dest: "~/.dotfiles"
+
+    - name: Stow dotfiles
+      tags: dotfiles
+      command: stow -v --dir ~/.dotfiles/dotfiles --target ~ {{ dotfiles_groups | join(' ') }}
+      register: stow_dotfiles
+      changed_when: stow_dotfiles.stderr | length > 0
+      vars:
+        dotfiles_groups:
+          - git
+          - python
+          - scripts
+          - tmux
+          - vim
