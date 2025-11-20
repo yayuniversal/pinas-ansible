@@ -2,7 +2,7 @@
 
 {% block server_params %}
 # allow large file uploads
-client_max_body_size 50000M;
+client_max_body_size 0;
 
 # enable websockets: http://nginx.org/en/docs/http/websocket.html
 proxy_http_version 1.1;
