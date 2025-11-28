@@ -3,16 +3,26 @@
   hosts: all
   tags: user
 
+  vars_files:
+    - ../vars/main.yml
+    - ../vars/secrets.yml
+
   tasks:
     - name: Clone dotfiles repo
       tags: dotfiles
       git:
         repo: git@github.com:yayuniversal/dotfiles.git
-        dest: "~/.dotfiles"
+        dest: ~/.dotfiles
+
+    - name: Clone oh-my-zsh
+      tags: omz
+      git:
+        repo: https://github.com/ohmyzsh/ohmyzsh.git
+        dest: ~/.oh-my-zsh
 
     - name: Stow dotfiles
       tags: dotfiles
-      command: stow -v --dir ~/.dotfiles/dotfiles --target ~ {{ dotfiles_groups | join(' ') }}
+      command: stow --verbose --no-folding --dir ~/.dotfiles --target ~ {{ dotfiles_groups | join(' ') }}
       register: stow_dotfiles
       changed_when: stow_dotfiles.stderr | length > 0
       vars:
@@ -22,3 +32,29 @@
           - scripts
           - tmux
           - vim
+          - zsh
+
+    - name: Create ~/.zsh-custom/plugins directory for zsh plugins
+      file:
+        path: ~/.zsh-custom/plugins
+        state: directory
+
+    - name: Add zsh plugins
+      tags: omz
+      git:
+        repo: "{{ plugin.repo }}"
+        dest: ~/.zsh-custom/plugins/{{ plugin.name }}
+      loop_control:
+        loop_var: plugin
+        label: "{{ plugin.name }}"
+      loop:
+        - name: zsh-autosuggestions
+          repo: https://github.com/zsh-users/zsh-autosuggestions.git
+        - name: zsh-syntax-highlighting
+          repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
+
+    - name: Set user shell to zsh
+      become: yes
+      user:
+        name: "{{ username }}"
+        shell: /usr/bin/zsh
