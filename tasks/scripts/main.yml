@@ -1,0 +1,22 @@
+---
+- name: Copy custom scripts to /usr/local/bin
+  template:
+    src: "{{ item }}"
+    dest: /usr/local/bin/{{ item | basename }}
+    owner: root
+    group: root
+    mode: 0755
+  loop_control:
+    label: "{{ item | basename }}"
+  with_fileglob: "templates/bin/*"
+
+- name: Copy custom scripts to /usr/local/sbin
+  template:
+    src: "{{ item }}"
+    dest: /usr/local/sbin/{{ item | basename }}
+    owner: root
+    group: root
+    mode: 0755
+  loop_control:
+    label: "{{ item | basename }}"
+  with_fileglob: "templates/sbin/*"
