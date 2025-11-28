@@ -42,6 +42,7 @@
     directory mask = {{ share.directory_mask | default('0770') }}
     force create mode = {{ share.force_create_mode | default('0660') }}
     force directory mode = {{ share.force_directory_mode | default('0770') }}
+    inherit permissions = {{ share.inherit_permissions | default('yes') }}
     valid users = {{ share.users | default([]) | join(', ') }}
 {% if share.allow_hosts is defined %}
     hosts allow = {{ share.allow_hosts | join(', ') }}
