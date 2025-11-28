@@ -34,6 +34,7 @@
           - git
           - htop
           - jq
+          - lazygit
           - lm-sensors
           - lsd
           - lshw
@@ -44,6 +45,7 @@
           - python3
           - stow
           - tcpdump
+          - tig
           - tmux
           - tree
           - unzip
