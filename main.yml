@@ -44,6 +44,7 @@
     - { import_tasks: tasks/docker-containers/main.yml, tags: containers }
     - { import_tasks: tasks/playlist-sync/main.yml, tags: playlist-sync }
     - { import_tasks: tasks/samba/main.yml, tags: samba }
+    - { import_tasks: tasks/scripts/main.yml, tags: scripts }
 
     - name: Add user {{ username }} to groups {{ ', '.join(user_groups + unix_groups | list) }}
       tags: groups
