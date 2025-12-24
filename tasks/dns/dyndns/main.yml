@@ -3,8 +3,11 @@
   copy:
     content: |
       #!/bin/bash
-      curl -4 -X POST https://{{ dyndns_login }}:{{ dyndns_pass }}@infomaniak.com/nic/update?hostname={{ dyndns_domain }} > /var/log/dyndns4.log
-      curl -6 -X POST https://{{ dyndns_login }}:{{ dyndns_pass }}@infomaniak.com/nic/update?hostname={{ dyndns_domain }} > /var/log/dyndns6.log
+      mkdir -p /var/log/dyndns
+      curl -4 -X POST -w '\n' https://{{ dyndns_login }}:{{ dyndns_pass }}@infomaniak.com/nic/update?hostname=auto.{{ dyndns_domain }} >  /var/log/dyndns/auto.{{ dyndns_domain }}.log
+      curl -6 -X POST -w '\n' https://{{ dyndns_login }}:{{ dyndns_pass }}@infomaniak.com/nic/update?hostname=auto.{{ dyndns_domain }} >> /var/log/dyndns/auto.{{ dyndns_domain }}.log
+      curl -4 -X POST -w '\n' https://{{ dyndns_login }}:{{ dyndns_pass }}@infomaniak.com/nic/update?hostname=ipv4.{{ dyndns_domain }} >  /var/log/dyndns/ipv4.{{ dyndns_domain }}.log
+      curl -6 -X POST -w '\n' https://{{ dyndns_login }}:{{ dyndns_pass }}@infomaniak.com/nic/update?hostname=ipv6.{{ dyndns_domain }} >  /var/log/dyndns/ipv6.{{ dyndns_domain }}.log
     dest: /usr/local/sbin/dyndns-update
     owner: root
     group: root
