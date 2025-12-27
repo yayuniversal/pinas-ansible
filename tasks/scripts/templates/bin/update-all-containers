@@ -1,0 +1,15 @@
+#!/bin/bash
+# Check if running as root or in docker group
+if [[ $EUID -ne 0 ]] && ! (id -Gn | grep -q "\bdocker\b"); then
+    echo "Must be run as root (or be in the docker group)" 1>&2
+    exit 1
+fi
+
+# Pull new images and restart containers
+for compose_file in /opt/docker-containers/*/docker-compose.yml; do
+    docker compose -f "$compose_file" pull
+    docker compose -f "$compose_file" up -d
+done
+
+# Prune old images
+docker image prune -f
