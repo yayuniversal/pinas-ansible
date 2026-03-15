@@ -4,6 +4,12 @@
 # allow large file uploads
 client_max_body_size 0;
 
+# disable buffering uploads to prevent OOM on reverse proxy server and make uploads twice as fast (no pause)
+proxy_request_buffering off;
+
+# increase body buffer to avoid limiting upload speed
+client_body_buffer_size 1024k;
+
 # enable websockets: http://nginx.org/en/docs/http/websocket.html
 proxy_http_version 1.1;
 proxy_set_header   Upgrade    $http_upgrade;
