@@ -50,7 +50,7 @@ services:
 
   redis:
     container_name: immich_redis
-    image: docker.io/valkey/valkey:9@sha256:546304417feac0874c3dd576e0952c6bb8f06bb4093ea0c9ca303c73cf458f63
+    image: docker.io/valkey/valkey:9@sha256:3eeb09785cd61ec8e3be35f8804c8892080f3ca21934d628abc24ee4ed1698f6
     healthcheck:
       test: redis-cli ping || exit 1
     restart: always
@@ -75,7 +75,7 @@ services:
 
   power-tools:
     container_name: immich_power_tools
-    image: ghcr.io/varun-raj/immich-power-tools:latest
+    image: ghcr.io/immich-power-tools/immich-power-tools:latest
     ports:
       - "127.0.0.1:{{ services['immich-power-tools'].port }}:3000"
     env_file:
