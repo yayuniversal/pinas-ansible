@@ -23,6 +23,7 @@
     - name: Install some utilities and command line tools
       apt:
         name:
+          - acl
           - bat
           - btop
           - command-not-found
@@ -31,9 +32,11 @@
           - exiftool
           - fd-find
           - fish
+          - fzf
           - git
           - htop
           - jq
+          - lastlog2
           - lazygit
           - lm-sensors
           - lsd
@@ -51,6 +54,7 @@
           - unzip
           - vim
           - wget
+          - wtmpdb
           - zsh
         state: present
       when: install_common_tools
