@@ -1,13 +1,9 @@
-networks:
-  immich_default:
-    external: true
-
 services:
   pgadmin:
     image: dpage/pgadmin4
     container_name: pgadmin
     networks:
-      - immich_default
+      - immich_immich
     ports:
       - 127.0.0.1:{{ services.pgadmin.port }}:80
     env_file:
@@ -17,3 +13,7 @@ services:
 
 volumes:
   pgadmin-data:
+
+networks:
+  immich_immich:
+    external: true

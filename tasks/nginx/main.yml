@@ -29,6 +29,8 @@
     group: root
     mode: 0644
   with_fileglob: conf.d/*
+  loop_control:
+    label: "{{ item | basename }}"
   register: nginx_config_files
 
 - name: Copy Nginx vhosts config files to /etc/nginx/sites-available

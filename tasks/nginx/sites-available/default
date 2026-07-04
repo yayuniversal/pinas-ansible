@@ -1,6 +1,7 @@
 server {
     listen 443 ssl default_server;
     listen [::]:443 ssl default_server;
+    listen [::]:{{ public_port }} ssl default_server;
 
     server_name _;
 

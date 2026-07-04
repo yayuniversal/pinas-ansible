@@ -35,3 +35,8 @@ services:
   pgadmin:
     subdomain: pgadmin
     port: 5050
+
+public_services:
+  ipp:
+    subdomain: pics
+    port: 3000
