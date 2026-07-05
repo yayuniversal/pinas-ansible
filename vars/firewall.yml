@@ -52,3 +52,10 @@ firewall_rules:
     port: 443
     proto: tcp
     rule: allow
+
+  # HTTPS for publicly exposed services
+  - comment: Allow HTTPS for public services
+    from: '::/0'
+    port: "{{ public_port }}"
+    proto: tcp
+    rule: allow
