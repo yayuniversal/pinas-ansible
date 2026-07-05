@@ -1,0 +1,14 @@
+---
+- name: Copy nftables.conf to /etc/nftables.conf
+  template:
+    src: nftables.conf
+    dest: /etc/nftables.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Enable nft ruleset
+  service:
+    name: nftables
+    state: restarted
+    enabled: yes
