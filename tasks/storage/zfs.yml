@@ -1,14 +1,28 @@
 ---
-- name: Add {{ ansible_distribution_release }}-backports repository
-  apt_repository:
-    repo: deb http://deb.debian.org/debian {{ ansible_distribution_release }}-backports main contrib
-    filename: backports
-    update_cache: yes
+- name: Add {{ ansible_facts.distribution_release }}-backports repository
+  deb822_repository:
+    name: backports
+    types: deb
+    uris: http://deb.debian.org/debian
+    suites: "{{ ansible_facts.distribution_release }}-backports"
+    components:
+      - main
+      - contrib
+      - non-free-firmware
+    signed_by: /usr/share/keyrings/debian-archive-keyring.gpg
+    enabled: yes
+    install_python_debian: yes
+  register: _debian_backports_repo
+
+- name: Update apt cache
+  apt:
+    update_cache: true
+  when: _debian_backports_repo.changed
 
 - name: Install ZFS
   apt:
     name: zfsutils-linux
-    default_release: "{{ ansible_distribution_release }}-backports"
+    default_release: "{{ ansible_facts.distribution_release }}-backports"
     state: present
 
 - name: Import ZFS pool
