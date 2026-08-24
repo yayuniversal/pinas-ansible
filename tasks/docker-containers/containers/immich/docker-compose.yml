@@ -26,7 +26,8 @@ services:
     ports:
       - '127.0.0.1:{{ services.immich.port }}:2283'
     networks:
-      - immich
+      - internal
+      - server
       - ipp
     depends_on:
       - redis
@@ -48,7 +49,7 @@ services:
     env_file:
       - .env
     networks:
-      - immich
+      - internal
     restart: always
     healthcheck:
       disable: false
@@ -57,7 +58,7 @@ services:
     container_name: immich_redis
     image: docker.io/valkey/valkey:9@sha256:8e8d64b405ce18f41b8e5ee20aa4687a8ed0022d1298f2ce31cdcf3a76e09411
     networks:
-      - immich
+      - internal
     healthcheck:
       test: redis-cli ping || exit 1
     restart: always
@@ -76,7 +77,7 @@ services:
       # Do not edit the next line. If you want to change the database storage location on your system, edit the value of DB_DATA_LOCATION in the .env file
       - ${DB_DATA_LOCATION}:/var/lib/postgresql/data
     networks:
-      - immich
+      - internal
     shm_size: 128mb
     restart: always
     healthcheck:
@@ -91,10 +92,11 @@ services:
       - "127.0.0.1:{{ services['immich-power-tools'].port }}:3000"
     env_file:
       - .env
+      - env/power-tools.env
     networks:
-      - immich
+      - internal
     healthcheck:
-      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000/api/health"]
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://127.0.0.1:3000/api/health"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -117,9 +119,24 @@ services:
       start_period: 10s
       timeout: 5s
 
+  immich-folder-albums:
+    image: ghcr.io/yayuniversal/immich-folder-albums
+    container_name: immich_folder_albums
+    volumes:
+      - /nas/data/Photos:/photos:ro
+    env_file:
+      - env/folder-albums.env
+    environment:
+      IMMICH_API_URL: http://immich-server:2283/api
+      CRON_EXPRESSION: "0 */6 * * *"
+      ALBUM_NAME_REGEX: "(?<= - ).*"
+    networks:
+      - server
+
 volumes:
   model-cache:
 
 networks:
-  immich:
+  internal:
+  server:
   ipp:
