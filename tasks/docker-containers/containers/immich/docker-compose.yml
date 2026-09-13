@@ -128,10 +128,12 @@ services:
       - env/folder-albums.env
     environment:
       IMMICH_API_URL: http://immich-server:2283/api
-      CRON_EXPRESSION: "0 */6 * * *"
+      CRON_EXPRESSION: "0 */3 * * *"
       ALBUM_NAME_REGEX: "(?<= - ).*"
     networks:
       - server
+    depends_on:
+      - immich-server
 
 volumes:
   model-cache:
