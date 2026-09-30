@@ -1,0 +1,43 @@
+---
+common_packages:
+  - acl
+  - bat
+  - btop
+  - command-not-found
+  - cryptsetup
+  - curl
+  - exiftool
+  - fd-find
+  - fish
+  - fzf
+  - git
+  - htop
+  - jq
+  - lastlog2
+  - lazygit
+  - lm-sensors
+  - lsd
+  - lshw
+  - lsof
+  - lvm2
+  - ncdu
+  - neovim
+  - pipx
+  - pv
+  - python3
+  - python3-pip
+  - python3-venv
+  - python3-virtualenv
+  - stow
+  - tcpdump
+  - tig
+  - tmux
+  - tree
+  - unzip
+  - vim
+  - wget
+  - wtmpdb
+  - zsh
+
+common_packages_no_recommends:
+  - ffmpeg

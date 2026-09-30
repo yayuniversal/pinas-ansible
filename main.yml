@@ -1,17 +1,10 @@
 ---
-- import_playbook: playbooks/common.yml
-  tags: common
-  vars:
-    perform_full_upgrade: no
-    install_common_tools: yes
-    install_python_tools: yes
-    install_media_tools: yes
-
 - name: PiNAS setup
   hosts: nas
   become: true
 
   roles:
+    - { role: common, tags: common }
     - { role: argon-eon, tags: argon }
     - { role: wireguard, tags: wireguard }
     - { role: docker, tags: docker }
