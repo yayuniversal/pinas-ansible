@@ -1,0 +1,6 @@
+---
+raspi_reset__systemd_units_to_stop:
+  - syncthing@{{ username }}
+  - sanoid.timer
+  - cron
+  - smbd

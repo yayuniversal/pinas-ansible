@@ -17,6 +17,7 @@
     - { role: docker, tags: docker }
     - { role: lazydocker, tags: lazydocker }
     - { role: syncthing, tags: syncthing }
+    - { role: raspi_reset, tags: raspi-reset }
     - { role: dotfiles, tags: dotfiles }
     # - { role: nextcloud, tags: nextcloud }
 
@@ -24,7 +25,6 @@
     - { import_tasks: tasks/test.yml, tags: test }
     - { import_tasks: tasks/storage/main.yml, tags: storage }
     - { import_tasks: tasks/symlinks/main.yml, tags: symlinks }
-    - { import_tasks: tasks/raspi-reset/main.yml, tags: raspi-reset }
     - { import_tasks: tasks/users/main.yml, tags: users }
 
   tasks:
