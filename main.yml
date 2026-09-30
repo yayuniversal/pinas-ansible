@@ -17,6 +17,7 @@
     - { role: docker, tags: docker }
     - { role: lazydocker, tags: lazydocker }
     - { role: syncthing, tags: syncthing }
+    - { role: dotfiles, tags: dotfiles }
     # - { role: nextcloud, tags: nextcloud }
 
   pre_tasks:
@@ -42,6 +43,3 @@
         name: "{{ username }}"
         groups: "{{ user_groups + unix_groups | list }}"
         append: yes
-
-- import_playbook: playbooks/user.yml
-  tags: user

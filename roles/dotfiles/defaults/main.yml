@@ -1,0 +1,9 @@
+---
+dotfiles_repo: git@github.com:yayuniversal/dotfiles.git
+dotfiles_groups:
+  - git
+  - python
+  - scripts
+  - tmux
+  - vim
+  - zsh

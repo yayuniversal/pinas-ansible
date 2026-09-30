@@ -1,0 +1,15 @@
+---
+- name: Clone dotfiles repo
+  git:
+    repo: "{{ dotfiles_repo }}"
+    dest: ~/.dotfiles
+
+- name: Clone oh-my-zsh
+  git:
+    repo: https://github.com/ohmyzsh/ohmyzsh.git
+    dest: ~/.oh-my-zsh
+
+- name: Stow dotfiles
+  shell: stow --verbose --no-folding --dir ~/.dotfiles --target ~ {{ dotfiles_groups | join(' ') }}
+  register: __dotfiles_stow
+  changed_when: __dotfiles_stow.stderr | length > 0
