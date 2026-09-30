@@ -1,14 +1,14 @@
 ---
 - name: List containers and files
   set_fact:
-    container_list: "{{ 'tasks/docker-containers/containers/*/docker-compose.yml' | fileglob | map('dirname') | map('basename') }}"
+    container_list: "{{ 'tasks/pinas/docker-containers/containers/*/docker-compose.yml' | fileglob | map('dirname') | map('basename') }}"
     container_dirs: >
-      {{ lookup('filetree', 'tasks/docker-containers/containers', exclude='\.gitignore')
+      {{ lookup('filetree', 'tasks/pinas/docker-containers/containers', exclude='\.gitignore')
       | selectattr('state', 'equalto', 'directory')
       | map(attribute='path')
       | sort }}
     container_files: >
-      {{ lookup('filetree', 'tasks/docker-containers/containers', exclude='\.gitignore')
+      {{ lookup('filetree', 'tasks/pinas/docker-containers/containers', exclude='\.gitignore')
       | selectattr('state', 'equalto', 'file')
       | map(attribute='path')
       | sort }}
