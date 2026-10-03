@@ -5,11 +5,11 @@ class FilterModule(object):
 
     def filters(self):
         return {
-            'dictdict2list': self.dictdict2list,
+            'dict2records': self.dict2records,
             'split_and_strip': self.split_and_strip,
         }
 
-    def dictdict2list(self, d: dict[dict], key: str = 'key') -> list[dict]:
+    def dict2records(self, d: dict[str, dict], key: str = 'key') -> list[dict]:
         return [{
             key: k,
             **v
