@@ -59,3 +59,17 @@ firewall_rules:
     port: "{{ public_port }}"
     proto: tcp
     rule: allow
+
+  # WireGuard for immich-proxy
+  - comment: Allow wireguard for immich-proxy
+    rule: allow
+    interface_in: "{{ internet_interface }}"
+    port: 36667
+    proto: udp
+
+  # Allow immich access to immich-proxy
+  - comment: Allow immich access to immich-proxy
+    rule: allow
+    interface_in: ipp
+    port: "{{ services.immich.port }}"
+    proto: tcp

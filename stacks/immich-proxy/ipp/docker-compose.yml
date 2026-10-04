@@ -1,0 +1,26 @@
+services:
+  immich-public-proxy:
+    image: alangrainger/immich-public-proxy:latest
+    container_name: immich-public-proxy
+    restart: always
+    volumes:
+      - ./ipp-config.json:/app/config.json:ro
+    environment:
+      IMMICH_URL: http://169.254.0.0:2283
+      IPP_PORT: 3000
+    healthcheck:
+      test: curl -s http://localhost:3000/share/healthcheck -o /dev/null || exit 1
+      start_period: 10s
+      timeout: 5s
+  
+  traefik:
+    image: traefik
+    container_name: traefik
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+      - 127.0.0.1:8080:8080
+    volumes:
+      - ./traefik-config:/etc/traefik:ro
+      - ./traefik-certs:/certs

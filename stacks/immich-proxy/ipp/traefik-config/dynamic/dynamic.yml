@@ -1,0 +1,34 @@
+http:
+  routers:
+    ipp:
+      service: ipp
+      rule: "{{ domains.ipp | map('regex_replace', '^(.*)$', 'Host(`\\1`)') | join(' || ') }}"
+      entryPoints:
+        - websecure
+      middlewares:
+        - hsts
+      tls:
+        certResolver: letsencrypt
+        options: modern
+
+  middlewares:
+    hsts:
+      headers:
+        stsSeconds: 63072000
+        forceSTSHeader: true
+
+  services:
+    ipp:
+      loadBalancer:
+        servers:
+          - url: "http://immich-public-proxy:3000"
+
+tls:
+  options:
+    modern:
+      minVersion: VersionTLS13
+      curvePreferences:
+        - X25519MLKEM768
+        - X25519
+        - CurveP256
+        - CurveP384
