@@ -1,0 +1,10 @@
+---
+compose_stacks_src: "{{ playbook_dir }}/stacks/{{ inventory_hostname }}"
+compose_stacks_dest: /opt/docker-containers
+compose_stacks_marker: docker-compose.yml
+compose_stacks_exclude: '\.gitignore'
+compose_stacks_owner: root
+compose_stacks_group: docker
+compose_stacks_env_mode: "0640"
+compose_stacks_file_mode: "0644"
+compose_stacks_up: true

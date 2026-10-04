@@ -1,0 +1,43 @@
+---
+- name: Discover compose stacks
+  set_fact:
+    _compose_stacks_names: >
+      {{ (compose_stacks_src ~ '/*/' ~ compose_stacks_marker) | fileglob
+         | map('dirname') | map('basename') }}
+    _compose_stacks_dirs: >
+      {{ query('filetree', compose_stacks_src, exclude=compose_stacks_exclude)
+         | selectattr('state', 'equalto', 'directory')
+         | map(attribute='path')
+         | sort }}
+    _compose_stacks_files: >
+      {{ query('filetree', compose_stacks_src, exclude=compose_stacks_exclude)
+         | selectattr('state', 'equalto', 'file')
+         | map(attribute='path')
+         | sort }}
+
+- name: Create destination stack directories
+  file:
+    path: "{{ compose_stacks_dest }}/{{ item }}"
+    state: directory
+    owner: "{{ compose_stacks_owner }}"
+    group: "{{ compose_stacks_group }}"
+    mode: "0755"
+  loop: "{{ _compose_stacks_dirs }}"
+
+- name: Deploy compose stack files
+  template:
+    src: "{{ compose_stacks_src }}/{{ item }}"
+    dest: "{{ compose_stacks_dest }}/{{ item }}"
+    owner: "{{ compose_stacks_owner }}"
+    group: "{{ compose_stacks_group }}"
+    mode: "{{ item.endswith('.env') | ternary(compose_stacks_env_mode, compose_stacks_file_mode) }}"
+  loop: "{{ _compose_stacks_files }}"
+
+- name: Start containers
+  command: docker compose --ansi never --progress plain up -d
+  args:
+    chdir: "{{ compose_stacks_dest }}/{{ item }}"
+  loop: "{{ _compose_stacks_names }}"
+  register: _docker_compose_up
+  changed_when: "'Started' in _docker_compose_up.stderr"
+  when: compose_stacks_up

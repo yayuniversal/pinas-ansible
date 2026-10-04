@@ -9,6 +9,7 @@
     - { role: wireguard, tags: wireguard }
     - { role: docker, tags: docker }
     - { role: lazydocker, tags: lazydocker }
+    - { role: compose_stacks, tags: containers }
     - { role: syncthing, tags: syncthing }
     - { role: raspi_reset, tags: raspi-reset }
     - { role: dotfiles, tags: dotfiles }
@@ -25,7 +26,6 @@
     - { import_tasks: tasks/pinas/dns/main.yml, tags: dns }
     - { import_tasks: tasks/pinas/certbot/main.yml, tags: certbot }
     - { import_tasks: tasks/pinas/nginx/main.yml, tags: nginx }
-    - { import_tasks: tasks/pinas/docker-containers/main.yml, tags: containers }
     - { import_tasks: tasks/pinas/playlist-sync/main.yml, tags: playlist-sync }
     - { import_tasks: tasks/pinas/samba/main.yml, tags: samba }
     - { import_tasks: tasks/pinas/scripts/main.yml, tags: scripts }
