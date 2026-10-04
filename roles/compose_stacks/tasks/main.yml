@@ -34,10 +34,7 @@
   loop: "{{ _compose_stacks_files }}"
 
 - name: Start containers
-  command: docker compose --ansi never --progress plain up -d
-  args:
-    chdir: "{{ compose_stacks_dest }}/{{ item }}"
+  community.docker.docker_compose_v2:
+    project_src: "{{ compose_stacks_dest }}/{{ item }}"
   loop: "{{ _compose_stacks_names }}"
-  register: _docker_compose_up
-  changed_when: "'Started' in _docker_compose_up.stderr"
   when: compose_stacks_up
