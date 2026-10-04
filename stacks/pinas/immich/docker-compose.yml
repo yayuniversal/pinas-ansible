@@ -25,6 +25,7 @@ services:
       - .env
     ports:
       - '127.0.0.1:{{ services.immich.port }}:2283'
+      - '169.254.0.0:{{ services.immich.port }}:2283'
     networks:
       - internal
       - server

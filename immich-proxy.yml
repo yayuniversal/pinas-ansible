@@ -1,0 +1,10 @@
+---
+- name: immich-proxy setup
+  hosts: immich-proxy
+  become: true
+
+  roles:
+    - { role: docker, tags: docker }
+    - { role: wireguard, tags: wireguard }
+    - { role: lazydocker, tags: lazydocker }
+    - { role: compose_stacks, tags: containers }
