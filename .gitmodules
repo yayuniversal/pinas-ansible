@@ -1,9 +1,6 @@
 [submodule "roles/argon-eon"]
 	path = roles/argon-eon
 	url = git@github.com:yayuniversal/argon-eon-ansible-role.git
-[submodule "roles/duckdns"]
-	path = roles/duckdns
-	url = git@github.com:yayuniversal/duckdns-ansible-role.git
 [submodule "roles/wireguard"]
 	path = roles/wireguard
 	url = git@github.com:yayuniversal/wireguard-ansible-role.git
