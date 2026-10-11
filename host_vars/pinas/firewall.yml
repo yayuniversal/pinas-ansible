@@ -53,13 +53,6 @@ firewall_rules:
     proto: tcp
     rule: allow
 
-  # HTTPS for publicly exposed services
-  - comment: Allow HTTPS for public services
-    from: '::/0'
-    port: "{{ public_port }}"
-    proto: tcp
-    rule: allow
-
   # WireGuard for immich-proxy
   - comment: Allow wireguard for immich-proxy
     rule: allow

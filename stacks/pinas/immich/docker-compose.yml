@@ -29,7 +29,6 @@ services:
     networks:
       - internal
       - server
-      - ipp
     depends_on:
       - redis
       - database
@@ -103,23 +102,6 @@ services:
       retries: 3
       start_period: 40s
 
-  immich-public-proxy:
-    image: alangrainger/immich-public-proxy:latest
-    container_name: immich_public_proxy
-    restart: always
-    ports:
-      - "127.0.0.1:{{ public_services.ipp.port }}:3000"
-    volumes:
-      - ./ipp-config.json:/app/config.json
-    environment:
-      IMMICH_URL: http://immich-server:2283
-    networks:
-      - ipp
-    healthcheck:
-      test: curl -s http://localhost:3000/share/healthcheck -o /dev/null || exit 1
-      start_period: 10s
-      timeout: 5s
-
   immich-folder-albums:
     image: ghcr.io/yayuniversal/immich-folder-albums
     container_name: immich_folder_albums
@@ -142,4 +124,3 @@ volumes:
 networks:
   internal:
   server:
-  ipp:

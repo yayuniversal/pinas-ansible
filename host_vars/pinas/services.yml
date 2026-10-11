@@ -1,18 +1,18 @@
 ---
 services:
-  vaultwarden: 
+  vaultwarden:
     subdomain: passwords
     port: 8080
 
-  syncthing: 
+  syncthing:
     subdomain: syncthing
     port: 8384
 
-  transmission: 
+  transmission:
     subdomain: transmission
     port: 9091
 
-  navidrome: 
+  navidrome:
     subdomain: music
     port: 4533
 
@@ -35,8 +35,3 @@ services:
   pgadmin:
     subdomain: pgadmin
     port: 5050
-
-public_services:
-  ipp:
-    subdomain: pics
-    port: 3000
