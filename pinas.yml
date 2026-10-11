@@ -12,7 +12,6 @@
     - { role: compose_stacks, tags: containers }
     - { role: syncthing, tags: syncthing }
     - { role: raspi_reset, tags: raspi-reset }
-    - { role: dotfiles, tags: dotfiles }
     # - { role: nextcloud, tags: nextcloud }
 
   pre_tasks:
@@ -36,3 +35,8 @@
         name: "{{ username }}"
         groups: "{{ user_groups + unix_groups | list }}"
         append: yes
+
+- name: User setup
+  hosts: nas
+  roles:
+    - { role: dotfiles, tags: dotfiles }
