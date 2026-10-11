@@ -9,31 +9,31 @@ firewall_rules:
     app: ssh
 
   # WireGuard from internet
-  - comment: Allow port {{ wireguard_listen_port }}/udp for WireGuard on {{ internet_interface }}
+  - comment: Allow port {{ wireguard_interfaces.pinas.listen_port }}/udp for WireGuard on {{ internet_interface }}
     rule: allow
     interface_in: "{{ internet_interface }}"
-    port: "{{ wireguard_listen_port }}"
+    port: "{{ wireguard_interfaces.pinas.listen_port }}"
     proto: udp
 
   # All access via WireGuard for 10.0.1.0/24 and fd00:6969:420:1::/64
   - comment: Allow all traffic on WireGuard interface from 10.0.1.0/24
-    interface_in: "{{ wireguard_interface_name }}"
+    interface_in: pinas
     from: 10.0.1.0/24
     rule: allow
   - comment: Allow all traffic on WireGuard interface from fd00:6969:420:1::/64
-    interface_in: "{{ wireguard_interface_name }}"
+    interface_in: pinas
     from: fd00:6969:420:1::/64
     rule: allow
 
   # Samba via WireGuard for 10.0.2.0/24 and fd00:6969:420:2::/64
   - comment: Allow smb on WireGuard interface from 10.0.2.0/24
-    interface_in: "{{ wireguard_interface_name }}"
+    interface_in: pinas
     from: 10.0.2.0/24
     port: 445
     proto: tcp
     rule: allow
   - comment: Allow smb on WireGuard interface from fd00:6969:420:2::/64
-    interface_in: "{{ wireguard_interface_name }}"
+    interface_in: pinas
     from: fd00:6969:420:2::/64
     port: 445
     proto: tcp
@@ -41,13 +41,13 @@ firewall_rules:
 
   # HTTPS via WireGuard for 10.0.2.0/24 and fd00:6969:420:2::/64
   - comment: Allow HTTPS on WireGuard interface from 10.0.2.0/24
-    interface_in: "{{ wireguard_interface_name }}"
+    interface_in: pinas
     from: 10.0.2.0/24
     port: 443
     proto: tcp
     rule: allow
   - comment: Allow HTTPS on WireGuard interface from fd00:6969:420:2::/64
-    interface_in: "{{ wireguard_interface_name }}"
+    interface_in: pinas
     from: fd00:6969:420:2::/64
     port: 443
     proto: tcp
