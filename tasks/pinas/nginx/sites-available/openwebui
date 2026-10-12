@@ -1,0 +1,8 @@
+{% extends "proxy-template.j2" %}
+
+{% block server_params %}
+proxy_request_buffering off;
+proxy_set_header   Upgrade    $http_upgrade;
+proxy_set_header   Connection "upgrade";
+proxy_read_timeout 300s;
+{% endblock %}

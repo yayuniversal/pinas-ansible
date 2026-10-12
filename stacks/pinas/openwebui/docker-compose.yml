@@ -1,0 +1,11 @@
+services:
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: open-webui
+    restart: always
+    ports:
+      - 127.0.0.1:{{ services.openwebui.port }}:8080
+    env_file:
+      - .env
+    volumes:
+      - /nas/appdata/open-webui:/app/backend/data

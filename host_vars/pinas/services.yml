@@ -35,3 +35,7 @@ services:
   pgadmin:
     subdomain: pgadmin
     port: 5050
+
+  openwebui:
+    subdomain: ia
+    port: 3000
