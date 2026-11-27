@@ -39,3 +39,7 @@ services:
   openwebui:
     subdomain: ia
     port: 3000
+
+  anchor:
+    subdomain: notes
+    port: 3002

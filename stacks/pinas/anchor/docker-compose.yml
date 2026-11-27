@@ -1,0 +1,9 @@
+services:
+  anchor:
+    image: ghcr.io/zhfahim/anchor:latest
+    container_name: anchor
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:{{ services.anchor.port }}:3000"
+    volumes:
+      - /nas/appdata/anchor:/data

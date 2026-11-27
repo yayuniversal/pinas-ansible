@@ -1,0 +1,6 @@
+{% extends "proxy-template.j2" %}
+
+{% block server_params %}
+# allow large file uploads
+client_max_body_size 0;
+{% endblock %}
