@@ -5,9 +5,10 @@
     unix password sync = no
     use sendfile = yes
     map to guest = never
-    browseable = no
+    browseable = yes
     guest ok = no
     server smb encrypt = desired
+    access based share enum = yes
 
     # macOS / iOS compatibility
     vfs objects = fruit streams_xattr 
@@ -20,7 +21,6 @@
 
 [homes]
     read only = no
-    browseable = no
     guest ok = no
     create mask = 0600
     directory mask = 0700
@@ -36,7 +36,6 @@
 {% endif %}
     path = {{ share.path }}
     read only = {{ share.readonly | default(True) | ternary('yes', 'no') }}
-    browseable = {{ share.browsable | default(False) | ternary('yes', 'no') }}
     guest ok = {{ share.guest_ok | default(False) | ternary('yes', 'no') }}
     create mask = {{ share.create_mask | default('0660') }}
     directory mask = {{ share.directory_mask | default('0770') }}
